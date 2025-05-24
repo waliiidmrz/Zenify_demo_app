@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:zenify_chat/services/auth_service.dart';
-import 'package:zenify_chat/zenify_chat_entry.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,28 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
 
   Future<void> handleLogin() async {
-    final username = usernameController.text.trim();
-    final password = passwordController.text.trim();
-
-    if (username.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("⚠️ Please fill all fields")),
-      );
-      return;
-    }
-
-    final client = await AuthService.login(username, password);
-
-    if (client != null) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const ZenifyChatEntry()),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("❌ Login failed")),
-      );
-    }
+    Navigator.pushNamed(context, '/landing');
   }
 
   Future<void> handleSignUp() async {
